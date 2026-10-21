@@ -1,10 +1,16 @@
-function UserCard({user}){
-    return(
-        <div className="user-card">
-            <h2>{user.name}</h2>
-            <p>{user.email} </p>
-            <p>{user.city}</p>
-        </div>
-    );
+
+function UserCard({ user, onViewDetails }) {
+  return (
+    <div className="user-card">
+      <h3>{user.name}</h3>
+      <p>{user.email}</p>
+      <p>{user.city}</p>
+
+      <button onClick={() => onViewDetails(user)}>
+        View Details
+      </button>
+    </div>
+  );
 }
+
 export default UserCard;
