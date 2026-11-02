@@ -10,41 +10,48 @@ function App() {
   const [city, setCity] = useState("All");
   const [sortOrder, setSortOrder] = useState("az");
   const [selectedUser, setSelectedUser] = useState(null);
-
+const [users, setUsers] = useState([]);
   // Loading and error states
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  // Simulate loading users
   useEffect(() => {
-    const timer = setTimeout(() => {
+  async function fetchUsers() {
+    try {
+      setLoading(true);
+      setError("");
+
+      const response = await fetch(
+        "https://jsonplaceholder.typicode.com/users"
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch users");
+      }
+
+      const data = await response.json();
+
+      const formattedUsers = data.map((user) => ({
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        city: user.address.city,
+      }));
+
+      setUsers(formattedUsers);
+    } catch (err) {
+      setError("Could not load users. Please try again.");
+    } finally {
       setLoading(false);
-    }, 1500);
+    }
+  }
 
-    return () => clearTimeout(timer);
-  }, []);
+  fetchUsers();
+}, []);
 
-  // User data
-  const users = [
-    {
-      id: 1,
-      name: "Leanne Graham",
-      email: "sincere@april.biz",
-      city: "Gwenborough",
-    },
-    {
-      id: 2,
-      name: "Ervin Howell",
-      email: "ervin@example.com",
-      city: "Wisokyburgh",
-    },
-    {
-      id: 3,
-      name: "Clementine Bauch",
-      email: "clementine@example.com",
-      city: "McKenziehaven",
-    },
-  ];
+
+  
+  
 
   // Search and city filter
   const filteredUsers = users.filter((user) => {
@@ -83,13 +90,18 @@ function App() {
 
       {/* City filter */}
       <select
-        value={city}
-        onChange={(event) => setCity(event.target.value)}
-      >
-        <option value="All">All Cities</option>
-        <option value="Gwenborough">Gwenborough</option>
-        <option value="Wisokyburgh">Wisokyburgh</option>
-        <option value="McKenziehaven">McKenziehaven</option>
+        
+  value={city}
+  onChange={(event) => setCity(event.target.value)}
+>
+  <option value="All">All Cities</option>
+
+  {[...new Set(users.map((user) => user.city))].map((cityName) => (
+    <option key={cityName} value={cityName}>
+      {cityName}
+    </option>
+  ))}
+
       </select>
 
       {/* Sorting */}
@@ -101,6 +113,7 @@ function App() {
         <option value="za">Name Z - A</option>
       </select>
 
+      
       {/* Users list, loading and error states */}
       <div>
         {loading ? (
@@ -108,23 +121,23 @@ function App() {
         ) : error ? (
           <div>
             <p>{error}</p>
-
-            <button onClick={() => setError("")}>
+            <button onClick={() => window.location.reload()}>
               Try Again
-            </button>c
+            </button>
           </div>
         ) : sortedUsers.length > 0 ? (
           sortedUsers.map((user) => (
             <UserCard
               key={user.id}
               user={user}
-              onViewDetails={setSelectedUser}
+              onViewDetails={setSelectedUser}    
             />
           ))
         ) : (
           <p>No users found.</p>
         )}
       </div>
+
 
       {/* Selected user details */}
       {selectedUser && (
