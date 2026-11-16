@@ -1,16 +1,83 @@
-# React + Vite
+# User Directory – React Project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A responsive User Directory application built with React that allows users to explore, search, filter, sort, and view user information fetched from an external API.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Fetches user data from an external API.
+- Search users by name.
+- Filter users by city.
+- Sort users alphabetically (A–Z and Z–A).
+- Display user information in reusable cards.
+- View individual user details.
+- Loading state while fetching data.
+- Error handling with a retry option.
+- Displays the number of users matching the current filters.
+- Responsive layout for desktop and mobile devices.
 
-## React Compiler
+## Technologies Used
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React.js
+- JavaScript
+- HTML5
+- CSS3
+- Vite
+- Fetch API
+- JSONPlaceholder API
 
-## Expanding the ESLint configuration
+## API Used
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+User data is fetched from:
+
+https://jsonplaceholder.typicode.com/users
+
+## Getting Started
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/AnkitaSingh2209/react-user-directory.git
+```
+
+### 2. Navigate to the project folder
+
+```bash
+cd react-user-directory
+```
+
+### 3. Install dependencies
+
+```bash
+npm install
+```
+
+### 4. Start the development server
+
+```bash
+npm run dev
+```
+
+Open the local URL displayed in your terminal.
+
+## Project Structure
+
+```text
+react-user-directory/
+├── public/
+├── src/
+│   ├── components/
+│   │   ├── Header.jsx
+│   │   └── UserCard.jsx
+│   ├── App.jsx
+│   ├── App.css
+│   ├── index.css
+│   └── main.jsx
+├── package.json
+└── README.md
+```
+
+## Author
+
+Ankita Singh
+
+GitHub: https://github.com/AnkitaSingh2209
