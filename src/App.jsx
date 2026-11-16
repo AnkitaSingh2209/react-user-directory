@@ -112,7 +112,11 @@ const [users, setUsers] = useState([]);
         <option value="az">Name A - Z</option>
         <option value="za">Name Z - A</option>
       </select>
-
+{!loading && !error && (
+  <p className="user-count">
+    Showing {sortedUsers.length} of {users.length} users
+  </p>
+)}
       
       {/* Users list, loading and error states */}
       <div>
